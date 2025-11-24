@@ -21,7 +21,7 @@ export const getTourById = async (req, res) => {
   }
 };
 
-// Add a new tour with images
+// //Add a new tour with images
 // export const createTour = async (req, res) => {
 //   try {
 //     const data = req.body;

@@ -2,9 +2,8 @@ import jwt from "jsonwebtoken";
 
 const JWT_SECRET = process.env.JWT_SECRET || "replace_this_with_secure_secret";
 
-export const auth = (req, res, next) => {
+const auth = (req, res, next) => {
   try {
-    // Accept token from "Authorization: Bearer <token>" or raw "x-access-token" header
     const authHeader = req.headers.authorization || req.headers["x-access-token"];
     if (!authHeader) return res.status(401).json({ message: "No token provided" });
 
@@ -14,7 +13,6 @@ export const auth = (req, res, next) => {
 
     jwt.verify(token, JWT_SECRET, (err, decoded) => {
       if (err) return res.status(401).json({ message: "Invalid or expired token" });
-      // attach decoded payload to req.user
       req.user = decoded;
       next();
     });
