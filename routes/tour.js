@@ -1,43 +1,35 @@
 import express from "express";
 import multer from "multer";
-import { getAllTours, getTourById, createTour } from "../controllers/tourcontroller.js";
+import {
+  getAllTours,
+  getTourById,
+  createTour,
+  updateTour,
+  deleteTour
+} from "../controllers/tourcontroller.js";
+
 import auth from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
-// Multer config for image upload
 const storage = multer.diskStorage({
-  destination: (req, file, cb) => cb(null, './uploads'),
-  filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
+  destination: (req, file, cb) => cb(null, "./uploads"),
+  filename: (req, file, cb) => cb(null, Date.now() + "-" + file.originalname),
 });
+
 const upload = multer({ storage });
 
+// GET routes
 router.get("/", getAllTours);
 router.get("/:id", getTourById);
-// For admin: create tour with images (protected)
+
+// CREATE (Admin only)
 router.post("/", auth, upload.array("images", 10), createTour);
 
+// UPDATE (Admin only)
+router.put("/:id", auth, upload.array("images", 10), updateTour);
+
+// DELETE (Admin only)
+router.delete("/:id", auth, deleteTour);
+
 export default router;
-
-
-
-
-// import express from "express";
-// import multer from "multer";
-// import { getAllTours, getTourById, createTour } from "../controllers/tourController.js";
-
-// const router = express.Router();
-
-// // Multer config for image upload
-// const storage = multer.diskStorage({
-//   destination: (req, file, cb) => cb(null, './uploads'),
-//   filename: (req, file, cb) => cb(null, Date.now() + '-' + file.originalname)
-// });
-// const upload = multer({ storage });
-
-// router.get("/", getAllTours);
-// router.get("/:id", getTourById);
-// // For admin: create tour with images
-// router.post("/", upload.array("images", 10), createTour);
-
-// export default router;

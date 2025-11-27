@@ -6,8 +6,8 @@ const tourSchema = new mongoose.Schema({
   description: String,
   price: String,
   images: [String], // image file paths (Multer)
-  itinerary: [String],
-  highlights: [String],
+  // itinerary: [String],
+  // highlights: [String],
   // Add more fields if you want!
 });
 
