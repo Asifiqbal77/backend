@@ -30,6 +30,7 @@ router.post("/", auth, upload.array("images", 10), createTour);
 router.put("/:id", auth, upload.array("images", 10), updateTour);
 
 // DELETE (Admin only)
-router.delete("/:id", auth, deleteTour);
+// router.delete("/:id", auth, deleteTour);
+router.delete("/:id", deleteTour);
 
 export default router;

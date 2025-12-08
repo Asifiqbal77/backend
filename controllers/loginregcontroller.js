@@ -2,9 +2,9 @@ import User from '../model/auth.model.js';
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
 
-// Read secret from env (recommended) or fallback (change fallback for production)
+// Read secret from env (recommended) or fallback 
 const JWT_SECRET = process.env.JWT_SECRET || "replace_this_with_secure_secret";
-const TOKEN_EXPIRES_IN = "1h"; // adjust as needed
+const TOKEN_EXPIRES_IN = "3h"; // adjust as needed
 
 // Registration controller
 export const register = async (req, res) => {
